@@ -1,0 +1,21 @@
+---
+- name: Deploy Flask App to Kubernetes
+  hosts: kubernetes
+
+  tasks:
+
+    - name: Copy Kubernetes Deployment File
+      copy:
+        src: ../kubernetes/deployment.yaml
+        dest: /home/vagrant/deployment.yaml
+
+    - name: Copy Kubernetes Service File
+      copy:
+        src: ../kubernetes/service.yaml
+        dest: /home/vagrant/service.yaml
+
+    - name: Apply Deployment
+      shell: kubectl apply -f /home/vagrant/deployment.yaml
+
+    - name: Apply Service
+      shell: kubectl apply -f /home/vagrant/service.yaml
